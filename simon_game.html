@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="simon_game.css">
+    <title>Simon Game</title>
+</head>
+<body>
+    <h1 class="heading">Simon Game</h1>
+    <div>
+        <div class="result" id="level">Level 1</div>
+    </div>
+    
+    <div id="game-container">
+        <div class="btn-container">
+            <div class="container-card">
+                <div class="simon-button red" id="btn-1"></div>
+                <div class="simon-button green" id="btn-2"></div>
+            </div>
+            <div class="container-card">
+                <div class="simon-button blue" id="btn-3"></div>
+                <div class="simon-button yellow" id="btn-4"></div>
+            </div>    
+        </div>
+        <div>
+            
+        <div id="high-score">High Score: 0</div>
+        <!--<div id="timer">Time Left: <span id="time-left">10</span>s</div>-->
+        <button id="start-button">Start</button>
+        </div>
+    </div>
+    <audio id="audio-1" src="audio/red.mp3" preload="auto"></audio>
+    <audio id="audio-2" src="audio/green.mp3" preload="auto"></audio>
+    <audio id="audio-3" src="audio/blue.mp3" preload="auto"></audio>
+    <audio id="audio-4" src="audio/yellow.mp3" preload="auto"></audio>
+    <audio id="audio-wrong" src="audio/wrong.mp3" preload="auto"></audio>
+    <script src="simon_game.js"></script>
+</body>
+</html>
