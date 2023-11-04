@@ -2,7 +2,6 @@
 const buttons = document.querySelectorAll('.simon-button');
 const startButton = document.getElementById('start-button');
 const levelDisplay = document.getElementById('level');
-const lastlevel = document.getElementById('yourlevel');
 const highScoreDisplay = document.getElementById('high-score');
 const pattern = [];
 let playerPattern = [];
@@ -71,11 +70,14 @@ function gameOver() {
     level = 1;
     pattern.length = 0;
     document.getElementById('audio-wrong').play();
-    if (level - 1 > highScore) {
-        highScore = level - 1;
+    if (parseInt(level) - 1 > highScore) {
+        highScore = parseInt(level) - 1;
         highScoreDisplay.textContent = `High Score: ${highScore}`;
     }
 }
+
+// Initial setup
+highScoreDisplay.textContent = `High Score: ${highScore}`;
 
 // Event listeners
 buttons.forEach((button, index) => {
@@ -92,6 +94,3 @@ startButton.addEventListener('click', () => {
         pattern.push(Math.floor(Math.random() * 4) + 1);
     }
 });
-
-// Initial setup
-highScoreDisplay.textContent = `High Score: ${highScore}`;
