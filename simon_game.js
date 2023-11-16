@@ -2,11 +2,13 @@
 const buttons = document.querySelectorAll('.simon-button');
 const startButton = document.getElementById('start-button');
 const levelDisplay = document.getElementById('level');
-const highScoreDisplay = document.getElementById('high-score');
+const highScoreDisplay = document.getElementById('score');
 const pattern = [];
 let playerPattern = [];
 let level = 1;
-let highScore = 0;
+let highScore = parseInt(localStorage.getItem('highScore')) || 0;
+
+highScoreDisplay.textContent = `High Score: ${highScore}`;
 
 // Sound Effects
 const audio1 = document.getElementById('audio-1');
@@ -55,6 +57,13 @@ function checkPlayerInput() {
         if (JSON.stringify(playerPattern) === JSON.stringify(pattern)) {
             level++;
             levelDisplay.textContent = `Level ${level}`;
+            
+            if (level > highScore) {
+                highScore = level;
+                highScoreDisplay.textContent = `High Score: ${highScore}`;
+                localStorage.setItem('highScore', highScore);
+            }
+
             setTimeout(() => {
                 playPattern();
                 pattern.push(Math.floor(Math.random() * 4) + 1);
@@ -70,21 +79,26 @@ function gameOver() {
     level = 1;
     pattern.length = 0;
     document.getElementById('audio-wrong').play();
-    if (parseInt(level) - 1 > highScore) {
-        highScore = parseInt(level) - 1;
-        highScoreDisplay.textContent = `High Score: ${highScore}`;
-    }
 }
-
-// Initial setup
-highScoreDisplay.textContent = `High Score: ${highScore}`;
 
 // Event listeners
 buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
-        playerPattern.push(index + 1);
-        activateButton(index + 1);
-        checkPlayerInput();
+        // Check if the game is in progress
+        if (levelDisplay.textContent !== 'Game Over. Press Start to play again.') {
+            const expectedColor = pattern[playerPattern.length];
+
+            if (index + 1 === expectedColor) {
+                // Correct color clicked
+                playerPattern.push(index + 1);
+                activateButton(index + 1);
+                checkPlayerInput();
+            } else {
+                // Incorrect color clicked
+                document.getElementById('audio-wrong').play();
+                gameOver();
+            }
+        }
     });
 });
 

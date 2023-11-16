@@ -28,7 +28,7 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-#level, #high-score, #timer {
+#level, #score, #timer {
     color: #fff;
     font-size: 24px;
     margin-bottom: 20px;
